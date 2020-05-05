@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    environment.production ? [] : AkitaNgDevtools,
+    AkitaNgRouterStoreModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

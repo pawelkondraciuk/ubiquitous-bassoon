@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "staxter-angular-technical-task"
+    }
+  },
+  "defaultProject": "staxter-angular-technical-task",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
