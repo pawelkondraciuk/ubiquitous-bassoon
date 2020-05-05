@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay, withLatestFrom, filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'staxter-angular-technical-task';
+  @ViewChild('drawer') drawer: MatSidenav;
+  
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    router: Router) {
+      router.events.pipe(
+        withLatestFrom(this.isHandset$),
+        filter(([a, b]) => b && a instanceof NavigationEnd)
+      ).subscribe(_ => this.drawer.close());
+    }
+
+  onToggleSidebar() {
+    this.drawer.toggle();
+  }
 }

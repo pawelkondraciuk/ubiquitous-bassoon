@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
   path: '',
-  loadChildren: () => import('./rates/rates.module').then(m => m.RatesModule)
+  loadChildren: () => import('./pages/rates/rates.module').then(m => m.RatesModule)
 }, {
   path: 'historical',
-  loadChildren: () => import('./historical/historical.module').then(m => m.HistoricalModule)
+  loadChildren: () => import('./pages/historical/historical.module').then(m => m.HistoricalModule)
 }, {
-  path: 'difference',
-  loadChildren: () => import('./difference/difference.module').then(m => m.DifferenceModule)
+  path: 'top',
+  loadChildren: () => import('./pages/difference/difference.module').then(m => m.DifferenceModule)
 }];
 
 @NgModule({
