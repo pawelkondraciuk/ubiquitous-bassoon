@@ -27,7 +27,10 @@
       <ng-container matColumnDef="chart">
         <mat-header-cell *matHeaderCellDef>Chart</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <a mat-icon-button>
+          <a
+            mat-icon-button
+            [routerLink]="['historical', element.currency]"
+          >
             <mat-icon>insert_chart_outlined</mat-icon>
           </a>
         </mat-cell>

@@ -17,10 +17,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-height: 200px;
 }
 
-.list-item-active {
-  font-weight: bold;
-  color: mat-color($candy-app-accent);
-  background: rgba(0,0,0,.08);
+.mat-menu-item,
+.mat-list-item {
+  &.list-item-active {
+    font-weight: bold;
+    color: mat-color($candy-app-accent);
+    background: rgba(0,0,0,.08);
+  }
 }
 
 .loading-shade {

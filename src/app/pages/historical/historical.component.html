@@ -1,1 +1,17 @@
-<p>historical works!</p>
+<div class="page-container mat-elevation-z8">
+  <div class="loading-shade" *ngIf="loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-toolbar color="secondary">{{ currency$ | async }}</mat-toolbar>
+
+  <div class="chart-wrapper">
+    <ngx-charts-bar-vertical
+      yAxis="true"
+      xAxis="true"
+      [scheme]="colorScheme"
+      [results]="chartData$ | async"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>

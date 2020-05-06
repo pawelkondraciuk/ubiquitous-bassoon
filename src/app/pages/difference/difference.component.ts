@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { AppQuery } from '@state/app.query';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { takeUntil, tap, map, startWith, switchMap, filter } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { DifferenceQuery, LatestQuery } from './state/difference.query';
@@ -21,7 +21,7 @@ export class DifferenceComponent implements AfterViewInit, OnDestroy {
   displayedColumns = ['currency', 'difference', 'percentage'];
 
   private subscriptionDestroyer = new Subject();
-  private dataSubject = new Subject<LatestQuery[]>();
+  private dataSubject = new BehaviorSubject<LatestQuery[]>([]);
 
   constructor(
     private appQuery: AppQuery,
@@ -35,7 +35,6 @@ export class DifferenceComponent implements AfterViewInit, OnDestroy {
       takeUntil(this.subscriptionDestroyer),
       startWith({}),
       switchMap(() => this.differenceQuery.latest$),
-      filter<LatestQuery[]>(data => data.length > 0),
       map(values => orderBy(values, this.sort.active, this.sortDirection)),
       map(values => slice(values, 0, 5)),
       tap(data => this.dataSubject.next(data))
