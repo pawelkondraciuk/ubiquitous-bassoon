@@ -6,23 +6,22 @@ function calcDiff(a: number, b: number) {
   if (a > b) {
     return -1;
   } else if (b > a) {
-      return 1;
+    return 1;
   }
   return 0;
 }
-
 
 @Injectable({ providedIn: 'root' })
 export class RatesQuery {
   latest$ = this.appQuery.latest$.pipe(
     map(({ today, yesterday }) => {
       const currencies = Object.keys(today);
-      return currencies.map(currency => ({
+      return currencies.map((currency) => ({
         currency,
         spot: today[currency],
-        difference: calcDiff(today[currency], yesterday[currency])
-      }))
+        difference: calcDiff(today[currency], yesterday[currency]),
+      }));
     })
-  )
+  );
   constructor(private appQuery: AppQuery) {}
 }

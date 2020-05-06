@@ -6,28 +6,24 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-historical',
   templateUrl: './historical.component.html',
-  styleUrls: ['./historical.component.scss']
+  styleUrls: ['./historical.component.scss'],
 })
 export class HistoricalComponent implements OnInit {
   loading$ = this.appQuery.loading$;
   chartData$ = this.historicalQuery.chartData$;
   currency$ = this.historicalQuery.currency$;
-  
+
   colorScheme = {
-    domain: ['#ff4081']
-  }
+    domain: ['#ff4081'],
+  };
 
   constructor(
     private appQuery: AppQuery,
     private historicalQuery: HistoricalQuery,
-    private route: ActivatedRoute,
-  ) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.route.params
-      .pipe(
-
-      )
-      .subscribe();
+    this.route.params.pipe().subscribe();
   }
 }

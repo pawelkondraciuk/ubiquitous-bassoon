@@ -13,16 +13,16 @@ export class DifferenceQuery {
   latest$ = this.appQuery.latest$.pipe(
     map(({ today, yesterday }) => {
       const currencies = Object.keys(today);
-      return currencies.map(currency => {
+      return currencies.map((currency) => {
         const difference = today[currency] - yesterday[currency];
         const percentage = difference / today[currency];
         return {
           currency,
           difference,
           percentage,
-        }
-      })
+        };
+      });
     })
-  )
+  );
   constructor(private appQuery: AppQuery) {}
 }

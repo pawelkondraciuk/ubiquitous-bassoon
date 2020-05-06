@@ -40,12 +40,14 @@ import { RootComponent } from './pages/root/root.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
   ],
-  providers: [{
-    provide: ENDPOINT_URL,
-    useValue: 'https://api.exchangeratesapi.io',
-  }],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: ENDPOINT_URL,
+      useValue: 'https://api.exchangeratesapi.io',
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

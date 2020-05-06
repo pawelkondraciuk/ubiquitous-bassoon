@@ -9,7 +9,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -22,4 +21,4 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   declarations: [RatesComponent],
 })
-export class RatesModule { }
+export class RatesModule {}

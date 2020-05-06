@@ -6,7 +6,7 @@ const EMPTY_CURRENCY = 'EMPTY';
 export interface RatesState {
   [key: string]: {
     [key in string]: number;
-  }
+  };
 }
 
 export interface AppState {
@@ -17,7 +17,7 @@ export interface AppState {
 export function createInitialState(): AppState {
   return {
     baseCurrency: EMPTY_CURRENCY,
-    rates: {}
+    rates: {},
   };
 }
 
@@ -28,4 +28,3 @@ export class AppStore extends Store<AppState> {
     super(createInitialState());
   }
 }
-

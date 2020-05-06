@@ -13,8 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     HistoricalRoutingModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    NgxChartsModule
+    NgxChartsModule,
   ],
   declarations: [HistoricalComponent],
 })
-export class HistoricalModule { }
+export class HistoricalModule {}

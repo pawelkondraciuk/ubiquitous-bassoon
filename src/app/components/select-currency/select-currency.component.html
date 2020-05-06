@@ -4,7 +4,7 @@
   aria-label="Select a currency"
   matTooltip="Select a base currency"
 >
-  {{ currency === 'EMPTY' ? 'Loading' : currency }}
+  {{ currency === "EMPTY" ? "Loading" : currency }}
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
 <mat-menu #versionPicker="matMenu" class="currency-picker">
@@ -13,5 +13,7 @@
     [class.list-item-active]="_currency === currency"
     *ngFor="let _currency of currencies"
     (click)="onCurrencyClick(_currency)"
-  >{{ _currency }}</button>
+  >
+    {{ _currency }}
+  </button>
 </mat-menu>

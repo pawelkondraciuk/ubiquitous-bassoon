@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { AppQuery } from '@state/app.query';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
@@ -9,10 +15,9 @@ import { RatesQuery } from './state/rates.query';
 @Component({
   selector: 'app-rates',
   templateUrl: './rates.component.html',
-  styleUrls: ['./rates.component.scss']
+  styleUrls: ['./rates.component.scss'],
 })
 export class RatesComponent implements AfterViewInit, OnInit, OnDestroy {
-
   @ViewChild(MatSort) sort: MatSort;
 
   loading$ = this.appQuery.loading$;
@@ -21,20 +26,17 @@ export class RatesComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private subscriptionDestroyer = new Subject();
 
-  constructor(
-    private appQuery: AppQuery,
-    private ratesQuery: RatesQuery,
-  ) { }
+  constructor(private appQuery: AppQuery, private ratesQuery: RatesQuery) {}
 
   ngOnInit(): void {
     this.ratesQuery.latest$
-    .pipe(
-      takeUntil(this.subscriptionDestroyer),
-      tap(data => {
-        this.dataSource.data = data;
-      })
-    )
-    .subscribe();
+      .pipe(
+        takeUntil(this.subscriptionDestroyer),
+        tap((data) => {
+          this.dataSource.data = data;
+        })
+      )
+      .subscribe();
   }
 
   ngAfterViewInit() {

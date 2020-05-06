@@ -17,4 +17,4 @@ import { MatSortModule } from '@angular/material/sort';
   ],
   declarations: [DifferenceComponent],
 })
-export class DifferenceModule { }
+export class DifferenceModule {}

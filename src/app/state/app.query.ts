@@ -17,29 +17,31 @@ export class AppQuery extends Query<AppState> {
   loading$ = this.selectLoading();
   baseCurrency$ = this.select('baseCurrency');
   rates$ = this.select('rates');
-  latest$ = this.rates$.pipe(map<RatesState, LatestRates>((rates: RatesState) => {
-    const ratesKeys = Object.keys(rates);
-    if (ratesKeys.length === 0) {
-      return {
-        today: {},
-        yesterday: {},
-      } as LatestRates;
-    }
-    const [todayDate, yesterdayDate] = ratesKeys.reverse();
+  latest$ = this.rates$.pipe(
+    map<RatesState, LatestRates>((rates: RatesState) => {
+      const ratesKeys = Object.keys(rates);
+      if (ratesKeys.length === 0) {
+        return {
+          today: {},
+          yesterday: {},
+        } as LatestRates;
+      }
+      const [todayDate, yesterdayDate] = ratesKeys.reverse();
 
-    return {
-      today: rates[todayDate],
-      yesterday: rates[yesterdayDate],
-    } as LatestRates;
-  }));
+      return {
+        today: rates[todayDate],
+        yesterday: rates[yesterdayDate],
+      } as LatestRates;
+    })
+  );
   currencies$ = this.baseCurrency$.pipe(
     withLatestFrom(this.latest$),
     map(([baseCurrency, { today }]) => {
       const currencies = [
         ...Object.keys(today),
         // baseCurrency,
-      ]
-  
+      ];
+
       return currencies.sort();
     })
   );

@@ -4,7 +4,14 @@
   </div>
 
   <div class="table-container">
-    <mat-table [dataSource]="data" class="mat-elevation-z8" matSort matSortDisableClear matSortActive="percentage" matSortDirection="asc">
+    <mat-table
+      [dataSource]="data"
+      class="mat-elevation-z8"
+      matSort
+      matSortDisableClear
+      matSortActive="percentage"
+      matSortDirection="asc"
+    >
       <ng-container matColumnDef="currency">
         <mat-header-cell *matHeaderCellDef>Currency</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.currency }} </mat-cell>
@@ -12,16 +19,24 @@
 
       <ng-container matColumnDef="difference">
         <mat-header-cell *matHeaderCellDef> Difference </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.difference | number }} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.difference | number }}
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="percentage">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Percentage </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.percentage | percent }} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Percentage
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.percentage | percent }}
+        </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
   </div>
 </div>
