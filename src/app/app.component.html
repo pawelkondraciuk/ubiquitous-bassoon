@@ -1,7 +1,14 @@
 <app-navbar
   [isHandset]="isHandset$ | async"
   (toggleSidebar)="onToggleSidebar()"
-></app-navbar>
+>
+  <app-select-currency
+    [loading]="loading$ | async"
+    [currency]="baseCurrency$ | async"
+    [currencies]="currencies$ | async"
+    (currencyChange)="onCurrencyChange($event)"
+  ></app-select-currency>
+</app-navbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav"
       [autoFocus]="false"

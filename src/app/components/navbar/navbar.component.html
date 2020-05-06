@@ -9,17 +9,5 @@
   </button>
   <span>staxter-angular-technical-task</span>
   <div class="flex-spacer"></div>
-  <button
-    mat-button
-    [matMenuTriggerFor]="versionPicker"
-    aria-label="Select a version"
-    matTooltip="Select a version of the documentation"
-  >
-    Pick currency
-    <mat-icon>arrow_drop_down</mat-icon>
-  </button>
-  <mat-menu #versionPicker="matMenu">
-    <button mat-menu-item>EUR</button>
-    <button mat-menu-item>USD</button>
-  </mat-menu>
+  <ng-content></ng-content>
 </mat-toolbar>

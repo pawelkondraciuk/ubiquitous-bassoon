@@ -15,14 +15,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SelectCurrencyComponent } from './components/select-currency/select-currency.component';
+import { ENDPOINT_URL } from './endpoint-url.token';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    SelectCurrencyComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     environment.production ? [] : AkitaNgDevtools,
     AkitaNgRouterStoreModule,
@@ -35,6 +40,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatListModule,
     MatMenuModule
   ],
+  providers: [{
+    provide: ENDPOINT_URL,
+    useValue: 'https://api.exchangeratesapi.io',
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,17 @@
+<button
+  mat-button
+  [matMenuTriggerFor]="versionPicker"
+  aria-label="Select a currency"
+  matTooltip="Select a base currency"
+>
+  {{ loading ? 'Loading' : currency }}
+  <mat-icon>arrow_drop_down</mat-icon>
+</button>
+<mat-menu #versionPicker="matMenu" class="currency-picker">
+  <button
+    mat-menu-item
+    [class.list-item-active]="_currency === currency"
+    *ngFor="let _currency of currencies"
+    (click)="onCurrencyClick(_currency)"
+  >{{ _currency }}</button>
+</mat-menu>
