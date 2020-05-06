@@ -1,25 +1,17 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { AppQuery } from '@state/app.query';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-function calcDiff(a: number, b: number) {
-  if (a > b) {
-    return -1;
-  } else if (b > a) {
-      return 1;
-  }
-  return 0;
-}
+import { RatesQuery } from './state/rates.query';
 
 @Component({
   selector: 'app-rates',
   templateUrl: './rates.component.html',
   styleUrls: ['./rates.component.scss']
 })
-export class RatesComponent implements OnInit, OnDestroy {
+export class RatesComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -31,32 +23,22 @@ export class RatesComponent implements OnInit, OnDestroy {
 
   constructor(
     private appQuery: AppQuery,
+    private ratesQuery: RatesQuery,
   ) { }
 
-  ngAfterViewInit() {
-    this.appQuery.latest$
-    .pipe(map(({ today, yesterday }) => {
-      const currencies = Object.keys(today);
-      return currencies.map(currency => ({
-        currency,
-        spot: today[currency],
-        difference: calcDiff(today[currency], yesterday[currency])
-      }))
-    }))
-    .subscribe(data => {
-      this.dataSource.data = data;
-    })
-    this.dataSource.sort = this.sort;
+  ngOnInit(): void {
+    this.ratesQuery.latest$
+    .pipe(
+      takeUntil(this.subscriptionDestroyer),
+      tap(data => {
+        this.dataSource.data = data;
+      })
+    )
+    .subscribe();
   }
 
-  ngOnInit(): void {
-    // this.appQuery.baseCurrency$
-    //   .pipe(
-    //     takeUntil(this.subscriptionDestroyer),
-    //     distinctUntilChanged(),
-    //     switchMap(() => this.ratesService.getLatest())
-    //   )
-    //   .subscribe()
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy() {
