@@ -7,7 +7,10 @@
   {{ currency === "EMPTY" ? "Loading" : currency }}
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
-<mat-menu #versionPicker="matMenu" class="currency-picker">
+<mat-menu
+  #versionPicker="matMenu"
+  class="currency-picker"
+>
   <button
     mat-menu-item
     [class.list-item-active]="_currency === currency"

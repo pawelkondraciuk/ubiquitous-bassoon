@@ -1,5 +1,8 @@
 <div class="page-container mat-elevation-z8">
-  <div class="loading-shade" *ngIf="loading$ | async">
+  <div
+    class="loading-shade"
+    *ngIf="loading$ | async"
+  >
     <mat-spinner></mat-spinner>
   </div>
 
@@ -25,7 +28,10 @@
       </ng-container>
 
       <ng-container matColumnDef="percentage">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
           Percentage
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -33,9 +39,7 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row
-        *matHeaderRowDef="displayedColumns; sticky: true"
-      ></mat-header-row>
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
   </div>
