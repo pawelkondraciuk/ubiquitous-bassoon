@@ -22,3 +22,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: mat-color($candy-app-accent);
   background: rgba(0,0,0,.08);
 }
+
+.loading-shade {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-container {
+  position: relative;
+  max-height: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}

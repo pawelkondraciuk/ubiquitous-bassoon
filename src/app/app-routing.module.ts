@@ -14,8 +14,14 @@ const routes: Routes = [{
   }, {
     path: 'top',
     loadChildren: () => import('./pages/difference/difference.module').then(m => m.DifferenceModule)
-  }]
-}];
+  }],
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'EUR'
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

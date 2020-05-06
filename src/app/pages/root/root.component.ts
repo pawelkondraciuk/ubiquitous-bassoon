@@ -56,7 +56,10 @@ export class RootComponent implements OnInit, OnDestroy {
     this.drawer.toggle();
   }
 
-  onCurrencyChange(baseCurrency: string) {
-    this.router.navigate([baseCurrency]);
+  onCurrencyChange(newCurrency: string) {
+    // nasty hack
+    const url = this.router.url;
+    const newUrl = url.replace(/^(\/)(\w{3})/, `$1${newCurrency}`);
+    this.router.navigateByUrl(newUrl);
   }
 }

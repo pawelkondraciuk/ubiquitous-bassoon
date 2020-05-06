@@ -14,7 +14,6 @@ export interface LatestRates {
 
 @Injectable({ providedIn: 'root' })
 export class AppQuery extends Query<AppState> {
-
   loading$ = this.selectLoading();
   baseCurrency$ = this.select('baseCurrency');
   rates$ = this.select('rates');
@@ -38,7 +37,7 @@ export class AppQuery extends Query<AppState> {
     map(([baseCurrency, { today }]) => {
       const currencies = [
         ...Object.keys(today),
-        baseCurrency,
+        // baseCurrency,
       ]
   
       return currencies.sort();

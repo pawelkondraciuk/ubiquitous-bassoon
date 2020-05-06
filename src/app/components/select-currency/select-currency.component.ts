@@ -9,7 +9,6 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 export class SelectCurrencyComponent {
   @Input() currencies: string[];
   @Input() currency: string;
-  @Input() loading: boolean;
   @Output() currencyChange = new EventEmitter<string>();
 
   onCurrencyClick(currency: string) {

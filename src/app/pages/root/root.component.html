@@ -1,5 +1,5 @@
 <app-navbar [isHandset]="isHandset$ | async" (toggleSidebar)="onToggleSidebar()">
-  <app-select-currency [loading]="loading$ | async" [currency]="baseCurrency$ | async"
+  <app-select-currency [currency]="baseCurrency$ | async"
     [currencies]="currencies$ | async" (currencyChange)="onCurrencyChange($event)"></app-select-currency>
 </app-navbar>
 <mat-sidenav-container class="sidenav-container">

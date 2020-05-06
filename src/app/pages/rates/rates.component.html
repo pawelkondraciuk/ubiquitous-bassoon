@@ -1,4 +1,4 @@
-<div class="container mat-elevation-z8">
+<div class="page-container mat-elevation-z8">
   <div class="loading-shade" *ngIf="loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
@@ -6,7 +6,7 @@
   <div class="table-container">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="currency" matSortDirection="asc">
       <ng-container matColumnDef="currency">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Currencty </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Currency </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.currency }} </mat-cell>
       </ng-container>
 
@@ -16,7 +16,7 @@
       </ng-container>
 
       <ng-container matColumnDef="difference">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Increase / Decrease</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Increase / Decrease</mat-header-cell>
         <mat-cell *matCellDef="let element" [ngSwitch]="element.difference">
           <mat-icon *ngSwitchCase="1">trending_up</mat-icon>
           <mat-icon *ngSwitchCase="-1">trending_down</mat-icon>

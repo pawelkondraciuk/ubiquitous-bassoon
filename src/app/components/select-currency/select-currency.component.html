@@ -4,7 +4,7 @@
   aria-label="Select a currency"
   matTooltip="Select a base currency"
 >
-  {{ loading ? 'Loading' : currency }}
+  {{ currency === 'EMPTY' ? 'Loading' : currency }}
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
 <mat-menu #versionPicker="matMenu" class="currency-picker">
