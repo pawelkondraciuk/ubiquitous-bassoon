@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 
-export interface RatesState {
+const EMPTY_CURRENCY = 'EMPTY';
 
+export interface RatesState {
+  [key: string]: {
+    [key in string]: number;
+  }
 }
 
 export interface AppState {
-  ui: {
-    baseCurrency: string;
-  },
-  currencies: string[],
-  latestDate: string,
+  baseCurrency: string;
+  rates: RatesState;
 }
 
 export function createInitialState(): AppState {
   return {
-    ui: { baseCurrency: null },
-    latestDate: null,
-    currencies: []
+    baseCurrency: EMPTY_CURRENCY,
+    rates: {}
   };
 }
 

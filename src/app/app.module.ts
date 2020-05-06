@@ -18,12 +18,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SelectCurrencyComponent } from './components/select-currency/select-currency.component';
 import { ENDPOINT_URL } from './endpoint-url.token';
 import { HttpClientModule } from '@angular/common/http';
+import { RootComponent } from './pages/root/root.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SelectCurrencyComponent,
+    RootComponent,
   ],
   imports: [
     BrowserModule,
