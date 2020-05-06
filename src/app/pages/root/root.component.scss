@@ -23,3 +23,9 @@
   flex-direction: column;
   padding: 25px 40px;
 }
+
+@media (max-width: 600px) {
+  .sidenav-content {
+    padding: 0;
+  }
+}
