@@ -1,24 +1,27 @@
 import {
   Component,
-  OnInit,
   OnDestroy,
   ViewChild,
   AfterViewInit,
 } from '@angular/core';
 import { AppQuery } from '@state/app.query';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import {
   takeUntil,
   tap,
   map,
   startWith,
   switchMap,
-  filter,
 } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { DifferenceQuery, LatestQuery } from './state/difference.query';
 import orderBy from 'lodash/orderBy';
 import slice from 'lodash/slice';
+
+interface SortEvent {
+  direction: 'asc' | 'desc';
+  field: string;
+}
 
 @Component({
   selector: 'app-difference',
@@ -29,28 +32,40 @@ export class DifferenceComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   loading$ = this.appQuery.loading$;
-  data: Observable<LatestQuery[]>;
+  data$: Observable<LatestQuery[]>;
   displayedColumns = ['currency', 'difference', 'percentage'];
 
   private subscriptionDestroyer = new Subject();
-  private dataSubject = new BehaviorSubject<LatestQuery[]>([]);
+  private sortSubject = new Subject<SortEvent>();
 
   constructor(
     private appQuery: AppQuery,
     private differenceQuery: DifferenceQuery
   ) {
-    this.data = this.dataSubject.asObservable();
+    this.data$ = this.sortSubject.pipe(
+      startWith({
+        direction: 'asc',
+        field: 'percentage',
+      } as SortEvent),
+      switchMap(({ direction, field }) =>
+        this.differenceQuery.latest$.pipe(
+          map((values) => orderBy(values, field, direction)),
+          map((values) => slice(values, 0, 5))
+        )
+      )
+    );
   }
 
   ngAfterViewInit() {
     this.sort.sortChange
       .pipe(
         takeUntil(this.subscriptionDestroyer),
-        startWith({}),
-        switchMap(() => this.differenceQuery.latest$),
-        map((values) => orderBy(values, this.sort.active, this.sortDirection)),
-        map((values) => slice(values, 0, 5)),
-        tap((data) => this.dataSubject.next(data))
+        tap(() => {
+          this.sortSubject.next({
+            field: this.sort.active,
+            direction: this.sort.direction as 'asc' | 'desc',
+          });
+        })
       )
       .subscribe();
   }
@@ -58,9 +73,5 @@ export class DifferenceComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptionDestroyer.next();
     this.subscriptionDestroyer.complete();
-  }
-
-  private get sortDirection() {
-    return this.sort.direction as 'asc' | 'desc';
   }
 }

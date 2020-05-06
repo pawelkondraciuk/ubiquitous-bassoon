@@ -8,7 +8,7 @@
 
   <div class="table-container">
     <mat-table
-      [dataSource]="data"
+      [dataSource]="data$"
       class="mat-elevation-z8"
       matSort
       matSortDisableClear
@@ -17,11 +17,11 @@
     >
       <ng-container matColumnDef="currency">
         <mat-header-cell *matHeaderCellDef>Currency</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.currency }} </mat-cell>
+        <mat-cell *matCellDef="let element">{{ element.currency }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="difference">
-        <mat-header-cell *matHeaderCellDef> Difference </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Difference</mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.difference | number }}
         </mat-cell>
