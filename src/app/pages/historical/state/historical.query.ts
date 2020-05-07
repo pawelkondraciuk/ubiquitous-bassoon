@@ -9,9 +9,12 @@ import { RouterQuery } from '@datorama/akita-ng-router-store';
 export class HistoricalQuery {
   currency$ = this.routerQuery.selectParams('currency');
   chartData$ = this.appQuery.rates$.pipe(
-    withLatestFrom(this.currency$),
-    map(([rates, currency]) => {
+    withLatestFrom(this.currency$, this.appQuery.baseCurrency$),
+    map(([rates, currency, baseCurrency]) => {
       const value = [];
+      if (!currency) {
+        return value;
+      }
       for (let date in rates) {
         const ratesByDay = rates[date];
         const currencyRate = ratesByDay[currency] || 1;

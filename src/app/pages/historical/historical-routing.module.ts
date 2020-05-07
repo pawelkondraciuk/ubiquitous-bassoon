@@ -7,6 +7,11 @@ const routes: Routes = [
     path: ':currency',
     component: HistoricalComponent,
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: HistoricalComponent,
+  },
 ];
 
 @NgModule({
