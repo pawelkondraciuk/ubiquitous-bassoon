@@ -25,12 +25,10 @@ export class RootComponent implements OnInit, OnDestroy {
   loading$ = this.appQuery.loading$;
   baseCurrency$ = this.appQuery.baseCurrency$;
   currencies$ = this.appQuery.currencies$;
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map((result) => result.matches),
+    shareReplay()
+  );
 
   private subscriptionDestroyer = new Subject();
 
@@ -43,10 +41,10 @@ export class RootComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.route.params
+    this.route.paramMap
       .pipe(
         takeUntil(this.subscriptionDestroyer),
-        switchMap(({ currency }) => this.appService.getLatest(currency))
+        switchMap((params) => this.appService.getLatest(params.get('currency')))
       )
       .subscribe();
     this.router.events

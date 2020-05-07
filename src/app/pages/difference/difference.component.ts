@@ -1,18 +1,7 @@
-import {
-  Component,
-  OnDestroy,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { AppQuery } from '@state/app.query';
 import { Subject, Observable } from 'rxjs';
-import {
-  takeUntil,
-  tap,
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
+import { takeUntil, tap, map, startWith, switchMap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { DifferenceQuery, LatestQuery } from './state/difference.query';
 import orderBy from 'lodash/orderBy';
